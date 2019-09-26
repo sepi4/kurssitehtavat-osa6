@@ -1,3 +1,16 @@
+export const voteAnecdote = (id) => {
+  return {
+    type: 'VOTE', 
+    data: id,
+  }
+}
+export const createAnecdote = (newContent) => {
+  return {
+    type: 'NEW', 
+    data: newContent,
+  }
+}
+
 const anecdotesAtStart = [
   'If it hurts, do it more often',
   'Adding manpower to a late software project makes it later!',
@@ -22,7 +35,7 @@ const initialState = anecdotesAtStart.map(asObject)
 const sortByVotes = (a, b) => -(a.votes - b.votes)
 
 const reducer = (state = initialState, action) => {
-  console.log('state now: ', state)
+  // console.log('state now: ', state)
   switch(action.type) {
     case "VOTE":
       const id = action.data
