@@ -4,7 +4,22 @@ const App = (props) => {
   const anecdotes = props.store.getState()
 
   const vote = (id) => {
-    props.store.dispatch({type: 'VOTE', data: id})
+    props.store.dispatch(
+      {
+        type: 'VOTE', 
+        data: id
+      }
+    )
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    const newContent = e.target.new.value
+    e.target.new.value = ''
+    props.store.dispatch({
+      type: 'NEW',
+      data: newContent,
+    })
   }
 
   return (
@@ -22,8 +37,12 @@ const App = (props) => {
         </div>
       )}
       <h2>create new</h2>
-      <form>
-        <div><input /></div>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <input 
+            name='new'
+          />
+        </div>
         <button>create</button>
       </form>
     </div>

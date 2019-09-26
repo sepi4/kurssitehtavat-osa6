@@ -35,6 +35,15 @@ const reducer = (state = initialState, action) => {
           return x
         }
       })
+
+    case "NEW":
+      const newAnecdote = {
+        content: action.data,
+        id: getId(),
+        votes: 0,
+      }
+      return [...state, newAnecdote]
+
     default:
       return state
   }
