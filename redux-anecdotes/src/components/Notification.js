@@ -6,10 +6,16 @@ const Notification = (props) => {
     padding: 10,
     borderWidth: 1
   }
-  return (
-    <div style={style}>
-      {props.store.getState().notification}
-    </div>
+  return ( 
+    <>
+      {props.store.getState().notification 
+          ? 
+            <div style={style}>
+              {props.store.getState().notification}
+            </div>
+          : null
+      }
+    </>
   )
 }
 
