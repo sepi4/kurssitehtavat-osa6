@@ -12,14 +12,14 @@ const AnecdoteList = (props) => {
   )
 
   const vote = (id) => {
-    props.store.dispatch(voteAnecdote(id))
+    props.voteAnecdote(id)
 
     const anecdote = anecdotes.find(a => a.id === id)
     const text = `you voted for "${anecdote.content}"`
-    props.store.dispatch(makeNotification(text))
+    props.makeNotification(text)
 
     setTimeout(() => {
-      props.store.dispatch(cleanNotification())
+      props.cleanNotification()
     }, 3000)
   }
 
@@ -48,6 +48,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
+  voteAnecdote,
   makeNotification,
   cleanNotification,
 }
