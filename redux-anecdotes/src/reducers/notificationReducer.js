@@ -12,7 +12,7 @@ export const cleanNotification = () => {
 }
 
 const reducer = (state = null, action) => {
-  console.log('state:', state)
+  // console.log('state:', state)
   switch(action.type) {
     case 'MAKE_NOTIFICATION':
       return action.data

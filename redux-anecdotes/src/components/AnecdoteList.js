@@ -3,7 +3,11 @@ import { voteAnecdote } from '../reducers/anecdoteReducer'
 import { makeNotification, cleanNotification } from '../reducers/notificationReducer'
 
 const AnecdoteList = (props) => {
-  const anecdotes = props.store.getState().anecdotes
+  let anecdotes = props.store.getState().anecdotes
+  anecdotes = anecdotes.filter(a => a.content
+    .toLowerCase()
+    .includes(props.store.getState().filter)
+  )
 
   const vote = (id) => {
     props.store.dispatch(voteAnecdote(id))
