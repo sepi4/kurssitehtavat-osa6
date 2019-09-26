@@ -10,6 +10,7 @@ const App = (props) => {
         data: id
       }
     )
+    console.log(props.store.getState())
   }
 
   const handleSubmit = e => {
