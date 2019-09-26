@@ -4,18 +4,14 @@ import { voteAnecdote } from '../reducers/anecdoteReducer'
 import { makeNotification, cleanNotification } from '../reducers/notificationReducer'
 
 const AnecdoteList = (props) => {
-  // let anecdotes = props.store.getState().anecdotes
-  let anecdotes = props.anecdotes
-  anecdotes = anecdotes.filter(a => a.content
-    .toLowerCase()
-    .includes(props.filter)
-  )
+  const anecdotes = props.anecdotes
 
   const vote = (id) => {
     props.voteAnecdote(id)
 
     const anecdote = anecdotes.find(a => a.id === id)
     const text = `you voted for "${anecdote.content}"`
+
     props.makeNotification(text)
 
     setTimeout(() => {
@@ -40,10 +36,17 @@ const AnecdoteList = (props) => {
   )
 }
 
+const filteredSortedAnecdotes =({ filter, anecdotes }) => {
+  return anecdotes.filter(a => a.content
+    .toLowerCase()
+    .includes(filter)
+  )
+} 
+
 const mapStateToProps = state => {
   return {
-    anecdotes: state.anecdotes,
-    filter: state.filter,
+    anecdotes: filteredSortedAnecdotes(state),
+    // filter: state.filter,
   }
 }
 

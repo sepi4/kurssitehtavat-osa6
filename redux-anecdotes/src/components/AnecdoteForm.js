@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { createAnecdote } from '../reducers/anecdoteReducer'
+import { makeNotification, cleanNotification } from '../reducers/notificationReducer'
 
 const AnecdoteForm = (props) => {
   const handleSubmit = e => {
@@ -9,6 +10,13 @@ const AnecdoteForm = (props) => {
     e.target.new.value = ''
     // props.store.dispatch(createAnecdote(newContent))
     props.createAnecdote(newContent)
+
+
+    props.makeNotification(`you added: "${newContent}"`)
+
+    setTimeout(() => {
+      props.cleanNotification()
+    }, 3000)
   }
   return (
     <div>
@@ -26,7 +34,9 @@ const AnecdoteForm = (props) => {
 }
 
 const mapDispatchToProps = {
-  createAnecdote
+  createAnecdote,
+  makeNotification,
+  cleanNotification,
 }
 
 export default connect(
