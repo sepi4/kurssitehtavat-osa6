@@ -1,9 +1,17 @@
 import anecdoteService from '../services/anecdotes'
 
 export const voteAnecdote = id => {
-  return {
-    type: 'VOTE', 
-    data: id,
+  return dispatch => {
+    anecdoteService.vote(id)
+      .then(updatedAnecdote => {
+        dispatch({
+          type: 'VOTE', 
+          data: {
+            id: updatedAnecdote.id,
+            votes: updatedAnecdote.votes
+          },
+        })
+      })
   }
 }
 
@@ -38,12 +46,13 @@ const reducer = (state = [], action) => {
       return action.data
 
     case "VOTE":
-      const id = action.data
+      const id = action.data.id
+      const votes = action.data.votes
       return state.map(x => {
         if (x.id === id) {
           return {
             ...x,
-            votes: x.votes + 1,
+            votes: votes,
           }
         }
         else {

@@ -11,9 +11,7 @@ const AnecdoteList = (props) => {
 
     const anecdote = anecdotes.find(a => a.id === id)
     const text = `you voted for "${anecdote.content}"`
-
     props.makeNotification(text)
-
     setTimeout(() => {
       props.cleanNotification()
     }, 3000)
