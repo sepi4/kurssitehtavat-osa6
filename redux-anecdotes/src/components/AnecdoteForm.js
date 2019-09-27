@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { createAnecdote } from '../reducers/anecdoteReducer'
 import { makeNotification, cleanNotification } from '../reducers/notificationReducer'
-import anecdoteService from '../services/anecdotes'
 
 const AnecdoteForm = (props) => {
   const handleSubmit = e => {
@@ -10,17 +9,13 @@ const AnecdoteForm = (props) => {
     let input = e.target.new
     const newContent = input.value
 
-    anecdoteService.createNew(newContent).then(a => {
-      console.log(a)
-      input.value = ''
+    props.createAnecdote(newContent)
+    input.value = ''
 
-      props.createAnecdote(a)
-      props.makeNotification(`you added: "${a.content}"`)
-
-      setTimeout(() => {
-        props.cleanNotification()
-      }, 3000)
-    })
+    // props.makeNotification(`you added: "${a.content}"`)
+    // setTimeout(() => {
+    //   props.cleanNotification()
+    // }, 3000)
 
 
   }

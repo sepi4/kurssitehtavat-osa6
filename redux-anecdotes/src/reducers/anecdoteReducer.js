@@ -1,16 +1,25 @@
-export const voteAnecdote = (id) => {
+import anecdoteService from '../services/anecdotes'
+
+export const voteAnecdote = id => {
   return {
     type: 'VOTE', 
     data: id,
   }
 }
-export const createAnecdote = (newContent) => {
-  return {
-    type: 'NEW', 
-    data: newContent,
+
+export const createAnecdote = content => {
+  return dispatch => {
+    anecdoteService.createNew(content)
+      .then(newAnecdote => {
+        dispatch({
+          type: 'NEW', 
+          data: newAnecdote,
+        })
+      })
   }
 }
-export const initializeAnecdotes = (arr) => {
+
+export const initializeAnecdotes = arr => {
   return {
     type: 'INIT',
     data: arr,
