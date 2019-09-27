@@ -34,13 +34,9 @@ export const initializeAnecdotes = arr => {
   }
 }
 
-
-
-
 const sortByVotes = (a, b) => -(a.votes - b.votes)
 
 const reducer = (state = [], action) => {
-  // console.log('state now: ', state)
   switch(action.type) {
     case "INIT":
       return action.data

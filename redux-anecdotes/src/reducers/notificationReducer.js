@@ -11,14 +11,23 @@ export const cleanNotification = () => {
   }
 }
 
+export const setNotification = (text, sec) => {
+  return dispatch => {
+    dispatch(makeNotification(text))
+    setTimeout(() => {
+      dispatch(cleanNotification())
+    }, sec * 1000)
+  }
+}
+
 const reducer = (state = null, action) => {
-  // console.log('state:', state)
   switch(action.type) {
     case 'MAKE_NOTIFICATION':
       return action.data
 
     case 'CLEAN_NOTIFICATION':
       return null
+
     default:
       return state
   }
